@@ -10,14 +10,48 @@ Vinicius guedes de macedo          - Vgm
 
 -- Script de criação dos sistema de Franquia de academia
 
+-- Limpa Banco de dados:
+
+-- DROP TABLE:
+DROP TABLE Treino CASCADE CONSTRAINTS;
+DROP TABLE Avaliação_Aluno CASCADE CONSTRAINTS;
+DROP TABLE Remuneração CASCADE CONSTRAINTS;
+DROP TABLE Mensalidade CASCADE CONSTRAINTS;
+DROP TABLE MBM CASCADE CONSTRAINTS;
+DROP TABLE Matricula CASCADE CONSTRAINTS;
+DROP TABLE Oferece CASCADE CONSTRAINTS;
+DROP TABLE Plano CASCADE CONSTRAINTS;
+DROP TABLE Atende CASCADE CONSTRAINTS;
+DROP TABLE Frequenta CASCADE CONSTRAINTS;
+DROP TABLE Contatos_Emergencia_Alunos CASCADE CONSTRAINTS;
+DROP TABLE Aluno CASCADE CONSTRAINTS;
+DROP TABLE Professor CASCADE CONSTRAINTS;
+DROP TABLE Funcionario CASCADE CONSTRAINTS;
+DROP TABLE Colaborador CASCADE CONSTRAINTS;
+DROP TABLE Unidade CASCADE CONSTRAINTS;
+DROP TABLE Telefone CASCADE CONSTRAINTS;
+DROP TABLE Pessoa CASCADE CONSTRAINTS;
+DROP TABLE Endereços CASCADE CONSTRAINTS;
+
+-- DROP SEQUENCES:
+DROP SEQUENCE Treino_id;
+DROP SEQUENCE Avaliação_Aluno_id;
+DROP SEQUENCE MBM_id;
+DROP SEQUENCE Matricula_id;
+DROP SEQUENCE Plano_id;
+DROP SEQUENCE Unidade_id;
+DROP SEQUENCE Pessoa_id;
+
+
 -- Endereço
-CREATE TABLE Endereços(
+CREATE TABLE Endereços (
     cep VARCHAR2(9),
     país VARCHAR2(50),
     estado VARCHAR2(50),
     cidade VARCHAR2(50),
     bairro VARCHAR2(50),
-    rua VARCHAR2(80)
+    rua VARCHAR2(80),
+    CONSTRAINT Endereços_pkey PRIMARY KEY (cep)
 );
 
 
@@ -31,10 +65,10 @@ CREATE TABLE Pessoa (
     numero VARCHAR2(5),
     complemento VARCHAR2(50),
     CONSTRAINT Pessoa_pkey PRIMARY KEY (id),
-    CONSTRAINT Pessoa_fkey FOREIGN KEY (cep) REFERENCES Endereço (cep)
+    CONSTRAINT Pessoa_fkey FOREIGN KEY (cep) REFERENCES Endereços (cep)
 );
 
-CREATE SEQUENCE Pessoa_id INCREMENT BY 1 START WITH 0;
+CREATE SEQUENCE Pessoa_id INCREMENT BY 1 START WITH 1;
 
 
 -- Telefone
@@ -53,10 +87,10 @@ CREATE TABLE Unidade (
     cep VARCHAR2(9),
     numero VARCHAR2(5),
     CONSTRAINT Unidade_pkey PRIMARY KEY (id_unidade),
-    CONSTRAINT Unidade_fkey FOREIGN KEY (cep) REFERENCES Endereço (cep)
+    CONSTRAINT Unidade_fkey FOREIGN KEY (cep) REFERENCES Endereços (cep)
 );
 
-CREATE SEQUENCE Unidade_id INCREMENT BY i START WITH 0;
+CREATE SEQUENCE Unidade_id INCREMENT BY 1 START WITH 1;
 
 
 -- Colaborador
@@ -111,7 +145,7 @@ CREATE TABLE Contatos_Emergencia_Alunos (
 
 -- Frequenta
 CREATE TABLE Frequenta (
-    data_acesso DATETIME,
+    data_acesso DATE,
     id_aluno integer,
     id_unidade integer,
     CONSTRAINT Frequenta_pkeys PRIMARY KEY (data_acesso, id_aluno, id_unidade),
@@ -136,11 +170,11 @@ CREATE TABLE Plano (
     nome VARCHAR2(50),
     valor DECIMAL(10,2),
     duração VARCHAR2(10),
-    CHECK (duração IN ("mensal", "anual")),
+    CHECK (duração IN ('mensal', 'anual')),
     CONSTRAINT Plano_pkey PRIMARY KEY (id_plano)
 );
 
-CREATE SEQUENCE Plano_id INCREMENT BY 1 START WITH 0;
+CREATE SEQUENCE Plano_id INCREMENT BY 1 START WITH 1;
 
 
 -- Oferece
@@ -162,14 +196,14 @@ CREATE TABLE Matricula (
     id_plano integer,
     status_matricula VARCHAR2(10),
     data_inicio DATE,
-    CHECK (status_matricula IN ("ativo", "inativo")),
+    CHECK (status_matricula IN ('ativo', 'inativo')),
     CONSTRAINT Matricula_pkeys PRIMARY KEY (id_matricula, id_aluno, id_unidade),
     CONSTRAINT Matricula_fkey1 FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa),
     CONSTRAINT Matricula_fkey2 FOREIGN KEY (id_unidade) REFERENCES Unidade (id_unidade),
     CONSTRAINT Matricula_fkey3 FOREIGN KEY (id_plano) REFERENCES Plano (id_plano)
 );
 
-CREATE SEQUENCE Matricula_id INCREMENT BY 1 START WITH 0;
+CREATE SEQUENCE Matricula_id INCREMENT BY 1 START WITH 1;
 
 
 -- Movimentações Bancárias Mensais
@@ -178,20 +212,23 @@ CREATE TABLE MBM (
     data_pagamento DATE,
     valor DECIMAL(10,2),
     status_mbm VARCHAR2(10),
-    CHECK (status_mbm IN ("pago", "pendente", "aberto")),
+    CHECK (status_mbm IN ('pago', 'pendente', 'aberto')),
     CONSTRAINT MBM_pkey PRIMARY KEY (id_pagamento) 
 );
 
-CREATE SEQUENCE MBM_id INCREMENT BY 1 START WITH 0;
+CREATE SEQUENCE MBM_id INCREMENT BY 1 START WITH 1;
 
 
 -- Mensalidade
 CREATE TABLE Mensalidade (
     id integer,
     id_matricula integer,
-    CONSTRAINT Mensalidade_pkeys PRIMARY KEY (id, id_matricula),
+    id_aluno integer,
+    id_unidade integer,
+    CONSTRAINT Mensalidade_pkey PRIMARY KEY (id),
     CONSTRAINT Mensalidade_fkey1 FOREIGN KEY (id) REFERENCES MBM (id_pagamento),
-    CONSTRAINT Mensalidade_fkey2 FOREIGN KEY (id_matricula) REFERENCES Matricula (id_matricula) 
+    CONSTRAINT Mensalidade_fkey2 FOREIGN KEY (id_matricula, id_aluno, id_unidade) 
+        REFERENCES Matricula (id_matricula, id_aluno, id_unidade)
 );
 
 -- Remuneração
@@ -200,7 +237,7 @@ CREATE TABLE Remuneração (
     colaborador_recebe integer,
     CONSTRAINT Remuneração_pkey PRIMARY KEY (id),
     CONSTRAINT Remuneração_fkey1 FOREIGN KEY (id) REFERENCES MBM (id_pagamento),
-    CONSTRAINT Remuneração_fkey2 FOREIGN KEY (id) REFERENCES Colaborador (id_pessoa)
+    CONSTRAINT Remuneração_fkey2 FOREIGN KEY (colaborador_recebe) REFERENCES Colaborador (id_pessoa)
 );
 
 
@@ -213,10 +250,10 @@ CREATE TABLE Avaliação_Aluno (
     data_avaliação DATE,
     CONSTRAINT Avaliação_Aluno_pkeys PRIMARY KEY (id_avaliação, id_aluno, id_professor),
     CONSTRAINT Avaliação_Aluno_fkey1 FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa),
-    CONSTRAINT Avaliação_Aluno_fkey1 FOREIGN KEY (id_professor) REFERENCES Professor (id_colaborador)
+    CONSTRAINT Avaliação_Aluno_fkey2 FOREIGN KEY (id_professor) REFERENCES Professor (id_colaborador)
 );
 
-CREATE SEQUENCE Avaliação_Aluno_id INCREMENT BY 1 START WITH 0;
+CREATE SEQUENCE Avaliação_Aluno_id INCREMENT BY 1 START WITH 1;
 
 
 -- Treino
@@ -224,8 +261,11 @@ CREATE TABLE Treino (
     id_treino integer,
     descrição VARCHAR2(200),
     id_avaliação_aluno integer,
+    id_aluno integer,
+    id_professor integer,
     CONSTRAINT Treino_pkey PRIMARY KEY (id_treino),
-    CONSTRAINT Treino_fkey FOREIGN KEY (id_avaliação_aluno) REFERENCES Avaliação_Aluno (id_avaliação)
+    CONSTRAINT Treino_fkey FOREIGN KEY (id_avaliação_aluno, id_aluno, id_professor)
+        REFERENCES Avaliação_Aluno (id_avaliação, id_aluno, id_professor)
 );
 
-CREATE SEQUENCE Treino_id INCREMENT BY 1 START WITH 0;
+CREATE SEQUENCE Treino_id INCREMENT BY 1 START WITH 1;
