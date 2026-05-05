@@ -1,8 +1,7 @@
 -- Equipe 2 --
-/* 
-Dyego Ferreira da Silva            - dfs10
+/* Dyego Ferreira da Silva            - dfs10
 Caio Ferreira Gomes da Silva       - cfgs
-Júlio Cesar da SIlva               - jcs8
+Júlio Cesar da SIlva                - jcs8
 Anysabele de Paula Barbosa Santos  - apbs2
 Jairo Cândido Gonzaga Neto         - jcgn
 Vinicius guedes de macedo          - Vgm
@@ -42,7 +41,6 @@ DROP SEQUENCE Plano_id;
 DROP SEQUENCE Unidade_id;
 DROP SEQUENCE Pessoa_id;
 
-
 -- Endereço
 CREATE TABLE Endereços (
     cep VARCHAR2(9),
@@ -54,13 +52,12 @@ CREATE TABLE Endereços (
     CONSTRAINT Endereços_pkey PRIMARY KEY (cep)
 );
 
-
 -- Pessoa
 CREATE TABLE Pessoa (
     id integer,
     nome VARCHAR2(50),
     data_nasc DATE,
-    cpf VARCHAR2(11),
+    cpf VARCHAR2(14), -- Aumentado para suportar máscara 000.000.000-00
     cep VARCHAR2(9),
     numero VARCHAR2(5),
     complemento VARCHAR2(50),
@@ -68,17 +65,15 @@ CREATE TABLE Pessoa (
     CONSTRAINT Pessoa_fkey FOREIGN KEY (cep) REFERENCES Endereços (cep)
 );
 
-CREATE SEQUENCE Pessoa_id INCREMENT BY 1 START WITH 1;
-
+CREATE SEQUENCE Pessoa_id INCREMENT BY 1 START WITH 1000;
 
 -- Telefone
 CREATE TABLE Telefone (
     id_pessoa integer,
-    telefone VARCHAR2(11),
+    telefone VARCHAR2(20), -- Aumentado para suportar máscara (81) 9 ...
     CONSTRAINT Telefone_pkeys PRIMARY KEY (id_pessoa, telefone),
     CONSTRAINT TELEFONE_fkey FOREIGN KEY (id_pessoa) REFERENCES Pessoa (id)
 );
-
 
 -- Unidade
 CREATE TABLE Unidade (
@@ -90,8 +85,7 @@ CREATE TABLE Unidade (
     CONSTRAINT Unidade_fkey FOREIGN KEY (cep) REFERENCES Endereços (cep)
 );
 
-CREATE SEQUENCE Unidade_id INCREMENT BY 1 START WITH 1;
-
+CREATE SEQUENCE Unidade_id INCREMENT BY 1 START WITH 1000;
 
 -- Colaborador
 CREATE TABLE Colaborador (
@@ -107,14 +101,12 @@ CREATE TABLE Colaborador (
     CONSTRAINT Colaborador_fkey3 FOREIGN KEY (unidade_alocado) REFERENCES Unidade (id_unidade)
 );
 
-
 -- Funcionário
 CREATE TABLE Funcionario (
     id_colaborador integer,
     CONSTRAINT Funcionario_pkey PRIMARY KEY (id_colaborador),
     CONSTRAINT Funcionario_fkey FOREIGN KEY (id_colaborador) REFERENCES Colaborador (id_pessoa)
 );
-
 
 -- Professor
 CREATE TABLE Professor (
@@ -123,14 +115,12 @@ CREATE TABLE Professor (
     CONSTRAINT Professor_fkey FOREIGN KEY (id_colaborador) REFERENCES Colaborador (id_pessoa)
 );
 
-
 -- Aluno
 CREATE TABLE Aluno (
     id_pessoa integer,
     CONSTRAINT Alumo_pkey PRIMARY KEY (id_pessoa),
     CONSTRAINT Alumo_fkey FOREIGN KEY (id_pessoa) REFERENCES Pessoa (id)
 );
-
 
 -- Contatos de Emergencia Alunos
 CREATE TABLE Contatos_Emergencia_Alunos (
@@ -142,7 +132,6 @@ CREATE TABLE Contatos_Emergencia_Alunos (
     CONSTRAINT CEM_fkey FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa)
 );
 
-
 -- Frequenta
 CREATE TABLE Frequenta (
     data_acesso DATE,
@@ -153,7 +142,6 @@ CREATE TABLE Frequenta (
     CONSTRAINT Frequenta_fkey2 FOREIGN KEY (id_unidade) REFERENCES Unidade (id_unidade)
 );
 
-
 -- Atende
 CREATE TABLE Atende (
     id_aluno integer,
@@ -163,19 +151,16 @@ CREATE TABLE Atende (
     CONSTRAINT Atende_fkey2 FOREIGN KEY (id_funcionario) REFERENCES Funcionario (id_colaborador)
 );
 
-
 -- Plano
 CREATE TABLE Plano (
     id_plano integer,
     nome VARCHAR2(50),
     valor DECIMAL(10,2),
-    duração VARCHAR2(10),
-    CHECK (duração IN ('mensal', 'anual')),
+    duração VARCHAR2(20), -- Aumentado para suportar '6 meses', '1 ano'
     CONSTRAINT Plano_pkey PRIMARY KEY (id_plano)
 );
 
-CREATE SEQUENCE Plano_id INCREMENT BY 1 START WITH 1;
-
+CREATE SEQUENCE Plano_id INCREMENT BY 1 START WITH 1000;
 
 -- Oferece
 CREATE TABLE Oferece (
@@ -186,7 +171,6 @@ CREATE TABLE Oferece (
     CONSTRAINT Oferece_fkey1 FOREIGN KEY (id_unidade) REFERENCES Unidade (id_unidade),
     CONSTRAINT Oferece_fkey2 FOREIGN KEY (id_plano) REFERENCES Plano (id_plano)
 );
-
 
 -- Matricula (Plano_Aluno_Unidade)
 CREATE TABLE Matricula (
@@ -203,8 +187,7 @@ CREATE TABLE Matricula (
     CONSTRAINT Matricula_fkey3 FOREIGN KEY (id_plano) REFERENCES Plano (id_plano)
 );
 
-CREATE SEQUENCE Matricula_id INCREMENT BY 1 START WITH 1;
-
+CREATE SEQUENCE Matricula_id INCREMENT BY 1 START WITH 1000;
 
 -- Movimentações Bancárias Mensais
 CREATE TABLE MBM (
@@ -216,8 +199,7 @@ CREATE TABLE MBM (
     CONSTRAINT MBM_pkey PRIMARY KEY (id_pagamento) 
 );
 
-CREATE SEQUENCE MBM_id INCREMENT BY 1 START WITH 1;
-
+CREATE SEQUENCE MBM_id INCREMENT BY 1 START WITH 1000;
 
 -- Mensalidade
 CREATE TABLE Mensalidade (
@@ -240,7 +222,6 @@ CREATE TABLE Remuneração (
     CONSTRAINT Remuneração_fkey2 FOREIGN KEY (colaborador_recebe) REFERENCES Colaborador (id_pessoa)
 );
 
-
 -- Avaliação de Aluno
 CREATE TABLE Avaliação_Aluno (
     id_avaliação integer,
@@ -253,8 +234,7 @@ CREATE TABLE Avaliação_Aluno (
     CONSTRAINT Avaliação_Aluno_fkey2 FOREIGN KEY (id_professor) REFERENCES Professor (id_colaborador)
 );
 
-CREATE SEQUENCE Avaliação_Aluno_id INCREMENT BY 1 START WITH 1;
-
+CREATE SEQUENCE Avaliação_Aluno_id INCREMENT BY 1 START WITH 1000;
 
 -- Treino
 CREATE TABLE Treino (
@@ -268,4 +248,4 @@ CREATE TABLE Treino (
         REFERENCES Avaliação_Aluno (id_avaliação, id_aluno, id_professor)
 );
 
-CREATE SEQUENCE Treino_id INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE Treino_id INCREMENT BY 1 START WITH 1000;
