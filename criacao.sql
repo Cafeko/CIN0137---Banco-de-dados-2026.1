@@ -109,6 +109,27 @@ CREATE TABLE Contatos_Emergencia_Alunos (
 );
 
 
+-- Frequenta
+CREATE TABLE Frequenta (
+    data_acesso DATETIME,
+    id_aluno integer,
+    id_unidade integer,
+    CONSTRAINT Frequenta_pkeys PRIMARY KEY (data_acesso, id_aluno, id_unidade),
+    CONSTRAINT Frequenta_fkey1 FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa),
+    CONSTRAINT Frequenta_fkey2 FOREIGN KEY (id_unidade) REFERENCES Unidade (id_unidade)
+);
+
+
+-- Atende
+CREATE TABLE Atende (
+    id_aluno integer,
+    id_funcionario integer,
+    CONSTRAINT Atende_pkeys PRIMARY KEY (id_aluno, id_funcionario),
+    CONSTRAINT Atende_fkey1 FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa),
+    CONSTRAINT Atende_fkey2 FOREIGN KEY (id_funcionario) REFERENCES Funcionario (id_colaborador)
+);
+
+
 -- Plano
 CREATE TABLE Plano (
     id_plano integer,
@@ -120,6 +141,17 @@ CREATE TABLE Plano (
 );
 
 CREATE SEQUENCE Plano_id INCREMENT BY 1 START WITH 0;
+
+
+-- Oferece
+CREATE TABLE Oferece (
+    id_unidade integer,
+    id_plano integer,
+    beneficios VARCHAR2(50),
+    CONSTRAINT Oferece_pkeys PRIMARY KEY (id_unidade, id_plano),
+    CONSTRAINT Oferece_fkey1 FOREIGN KEY (id_unidade) REFERENCES Unidade (id_unidade),
+    CONSTRAINT Oferece_fkey2 FOREIGN KEY (id_plano) REFERENCES Plano (id_plano)
+);
 
 
 -- Matricula (Plano_Aluno_Unidade)
@@ -173,11 +205,27 @@ CREATE TABLE Remuneração (
 
 
 -- Avaliação de Aluno
+CREATE TABLE Avaliação_Aluno (
+    id_avaliação integer,
+    id_aluno integer,
+    id_professor integer,
+    objetivo VARCHAR2(200),
+    data_avaliação DATE,
+    CONSTRAINT Avaliação_Aluno_pkeys PRIMARY KEY (id_avaliação, id_aluno, id_professor),
+    CONSTRAINT Avaliação_Aluno_fkey1 FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa),
+    CONSTRAINT Avaliação_Aluno_fkey1 FOREIGN KEY (id_professor) REFERENCES Professor (id_colaborador)
+);
+
+CREATE SEQUENCE Avaliação_Aluno_id INCREMENT BY 1 START WITH 0;
+
 
 -- Treino
+CREATE TABLE Treino (
+    id_treino integer,
+    descrição VARCHAR2(200),
+    id_avaliação_aluno integer,
+    CONSTRAINT Treino_pkey PRIMARY KEY (id_treino),
+    CONSTRAINT Treino_fkey FOREIGN KEY (id_avaliação_aluno) REFERENCES Avaliação_Aluno (id_avaliação)
+);
 
--- Frequenta
-
--- Oferece
-
--- Atende
+CREATE SEQUENCE Treino_id INCREMENT BY 1 START WITH 0;
