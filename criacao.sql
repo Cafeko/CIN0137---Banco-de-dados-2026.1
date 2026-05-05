@@ -73,6 +73,7 @@ CREATE TABLE Colaborador (
     CONSTRAINT Colaborador_fkey3 FOREIGN KEY (unidade_alocado) REFERENCES Unidade (id_unidade)
 );
 
+
 -- Funcionário
 CREATE TABLE Funcionario (
     id_colaborador integer,
@@ -109,8 +110,35 @@ CREATE TABLE Contatos_Emergencia_Alunos (
 
 
 -- Plano
+CREATE TABLE Plano (
+    id_plano integer,
+    nome VARCHAR2(50),
+    valor DECIMAL(10,2),
+    duração VARCHAR2(10),
+    CHECK (duração IN ("mensal", "anual")),
+    CONSTRAINT Plano_pkey PRIMARY KEY (id_plano)
+);
 
--- Treino
+CREATE SEQUENCE Plano_id INCREMENT BY 1 START WITH 0;
+
+
+-- Matricula (Plano_Aluno_Unidade)
+CREATE TABLE Matricula (
+    id_matricula integer,
+    id_aluno integer,
+    id_unidade integer,
+    id_plano integer,
+    status_matricula VARCHAR2(10),
+    data_inicio DATE,
+    CHECK (status_matricula IN ("ativo", "inativo")),
+    CONSTRAINT Matricula_pkeys PRIMARY KEY (id_matricula, id_aluno, id_unidade),
+    CONSTRAINT Matricula_fkey1 FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa),
+    CONSTRAINT Matricula_fkey2 FOREIGN KEY (id_unidade) REFERENCES Unidade (id_unidade),
+    CONSTRAINT Matricula_fkey3 FOREIGN KEY (id_plano) REFERENCES Plano (id_plano)
+);
+
+CREATE SEQUENCE Matricula_id INCREMENT BY 1 START WITH 0;
+
 
 -- Movimentações Bancárias Mensais
 
@@ -118,9 +146,12 @@ CREATE TABLE Contatos_Emergencia_Alunos (
 
 -- Remuneração
 
+-- Treino
+
+
+
 -- Avaliação de Aluno
 
--- Matricula (Plano_Aluno_Unidade)
 
 -- Frequenta
 
