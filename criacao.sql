@@ -141,17 +141,40 @@ CREATE SEQUENCE Matricula_id INCREMENT BY 1 START WITH 0;
 
 
 -- Movimentações Bancárias Mensais
+CREATE TABLE MBM (
+    id_pagamento integer,
+    data_pagamento DATE,
+    valor DECIMAL(10,2),
+    status_mbm VARCHAR2(10),
+    CHECK (status_mbm IN ("pago", "pendente", "aberto")),
+    CONSTRAINT MBM_pkey PRIMARY KEY (id_pagamento) 
+);
+
+CREATE SEQUENCE MBM_id INCREMENT BY 1 START WITH 0;
+
 
 -- Mensalidade
+CREATE TABLE Mensalidade (
+    id integer,
+    id_matricula integer,
+    CONSTRAINT Mensalidade_pkeys PRIMARY KEY (id, id_matricula),
+    CONSTRAINT Mensalidade_fkey1 FOREIGN KEY (id) REFERENCES MBM (id_pagamento),
+    CONSTRAINT Mensalidade_fkey2 FOREIGN KEY (id_matricula) REFERENCES Matricula (id_matricula) 
+);
 
 -- Remuneração
-
--- Treino
-
+CREATE TABLE Remuneração (
+    id integer,
+    colaborador_recebe integer,
+    CONSTRAINT Remuneração_pkey PRIMARY KEY (id),
+    CONSTRAINT Remuneração_fkey1 FOREIGN KEY (id) REFERENCES MBM (id_pagamento),
+    CONSTRAINT Remuneração_fkey2 FOREIGN KEY (id) REFERENCES Colaborador (id_pessoa)
+);
 
 
 -- Avaliação de Aluno
 
+-- Treino
 
 -- Frequenta
 
