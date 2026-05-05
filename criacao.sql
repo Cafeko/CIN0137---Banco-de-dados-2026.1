@@ -93,11 +93,20 @@ CREATE TABLE Professor (
 CREATE TABLE Aluno (
     id_pessoa integer,
     CONSTRAINT Alumo_pkey PRIMARY KEY (id_pessoa),
-    CONSTRAINT Alumo_fkey FOREIGN KEY (id_pessoa) REFERENCES Colaborador (id_pessoa)
+    CONSTRAINT Alumo_fkey FOREIGN KEY (id_pessoa) REFERENCES Pessoa (id)
 );
 
 
 -- Contatos de Emergencia Alunos
+CREATE TABLE Contatos_Emergencia_Alunos (
+    id_aluno integer,
+    nome_contato VARCHAR2(50),
+    data_nasc DATE,
+    parentesco VARCHAR2(50),
+    CONSTRAINT CEM_pkeys PRIMARY KEY (id_aluno, nome_contato),
+    CONSTRAINT CEM_fkey FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa)
+);
+
 
 -- Plano
 
