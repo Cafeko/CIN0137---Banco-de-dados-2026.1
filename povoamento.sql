@@ -10,7 +10,7 @@ Vinicius guedes de macedo          - Vgm
 
 -- script do povoamento --
 
--- 1. Endereços:
+-- 1. Endereços das Cidades que residem as Pessoas da Academia:
 INSERT INTO Endereços VALUES ('53020-000', 'Brasil', 'PE', 'Olinda', 'Varadouro', 'Rua do Amparo');
 INSERT INTO Endereços VALUES ('53030-010', 'Brasil', 'PE', 'Olinda', 'Carmo', 'Rua do Sol');
 INSERT INTO Endereços VALUES ('53040-000', 'Brasil', 'PE', 'Olinda', 'Bairro Novo', 'Avenida Getúlio Vargas');
@@ -35,14 +35,12 @@ INSERT INTO Endereços VALUES ('51030-030', 'Brasil', 'PE', 'Recife', 'Boa Viage
 INSERT INTO Endereços VALUES ('53130-150','Brasil','PE','Olinda','Bairro Novo','Rua da Smart Fit');
 
 
--- 2. Unidade:
+-- 2. o sistema de Academia possui duas Unidades principais:
 INSERT INTO Unidade VALUES (10, 'Smart fit', '53130-150', '111');  -- olinda
 INSERT INTO Unidade VALUES (20, 'Selfit', '51030-020', '122');   -- Boa Vidagem
 
 
-
-
--- 3. Pessoas: 
+-- 3. Todas as pessoas cadastradas em ambas academias: 
 
 INSERT INTO Pessoa VALUES (1111, 'Dyego Ferreira da Silva', TO_DATE('2002-03-10','YYYY-MM-DD'), '111.222.333-44', '53020-000', '10', 'A');
 INSERT INTO Pessoa VALUES (1113, 'Anysabele de Paula Barbosa Santos', TO_DATE('2004-07-22','YYYY-MM-DD'), '222.333.444-55', '53030-010', '20', 'Apto 101'); 
@@ -50,7 +48,6 @@ INSERT INTO Pessoa VALUES (1114, 'Caio Ferreira Gomes da Silva', TO_DATE('2000-0
 INSERT INTO Pessoa VALUES (1117, 'Júlio Cesar da Silva', TO_DATE('2002-01-12','YYYY-MM-DD'), '444.555.666-77', '53060-000', '40', 'Bloco B'); 
 INSERT INTO Pessoa VALUES (1119, 'Jairo Cândido Gonzaga Neto', TO_DATE('1996-01-25','YYYY-MM-DD'), '555.666.777-88', '53110-000', '50', 'C'); 
 INSERT INTO Pessoa VALUES (1115, 'Vinicius guedes de macedo', TO_DATE('1994-11-30','YYYY-MM-DD'), '666.777.888-99', '53120-000', '60', NULL);
-
 INSERT INTO Pessoa VALUES (1116, 'Leonardo Resende Toscano', TO_DATE('2003-06-06','YYYY-MM-DD'), '159.201.674-87', '53140-000', '70', 'A');
 INSERT INTO Pessoa VALUES (1120, 'Jefferson Fernandes da Silva', TO_DATE('2001-11-22','YYYY-MM-DD'), '158.211.974-81', '53150-000', '100', 'A');
 INSERT INTO Pessoa VALUES (1121, 'Mariana Alves de Souza', TO_DATE('1998-02-14','YYYY-MM-DD'), '101.202.303-40', '53240-000', '15', 'A');
@@ -81,13 +78,12 @@ INSERT INTO Pessoa VALUES (1145, 'Vanessa Rocha dos Santos', TO_DATE('2003-09-14
 INSERT INTO Pessoa VALUES (1146, 'Anderson Pereira Cavalcante', TO_DATE('1997-01-30','YYYY-MM-DD'), '767.767.878-95', '51020-020', '265', 'B');
 INSERT INTO Pessoa VALUES (1147, 'Priscila Alves Rodrigues', TO_DATE('2000-06-19','YYYY-MM-DD'), '878.878.989-06', '51021-010', '275', 'Casa');
 INSERT INTO Pessoa VALUES (1148, 'Roberto Souza Fernandes', TO_DATE('1993-12-08','YYYY-MM-DD'), '989.989.090-17', '51030-020', '285', 'Bloco F');
-
 INSERT INTO Pessoa VALUES (1149, 'Larissa Gomes Carvalho', TO_DATE('2001-03-02','YYYY-MM-DD'), '090.090.101-28', '51020-030', '295', NULL);
 INSERT INTO Pessoa VALUES (1150, 'Daniel Ribeiro de Melo', TO_DATE('1999-07-21','YYYY-MM-DD'), '111.111.212-39', '51010-000', '305', 'A');
 INSERT INTO Pessoa VALUES (1151, 'Beatriz Nunes da Costa', TO_DATE('2004-02-16','YYYY-MM-DD'), '222.222.323-40', '51021-020', '315', 'Apto 505');
 INSERT INTO Pessoa VALUES (1152, 'Thiago Martins Bezerra', TO_DATE('1995-11-04','YYYY-MM-DD'), '333.333.434-51', '51030-030', '325', 'Casa 3');
 
--- 4. Telefones:
+-- 4. Telefones de todas as Pessoas da Academia com seus respectivos nomes comentados:
 
 INSERT INTO Telefone VALUES (1111, '(81) 9 82990015'); -- Dyego Ferreira da Silva
 INSERT INTO Telefone VALUES (1113, '(81) 9 91234567'); -- Anysabele de Paula Barbosa Santos
@@ -130,7 +126,7 @@ INSERT INTO Telefone VALUES (1150, '(81) 9 91980998'); -- Daniel Ribeiro de Melo
 INSERT INTO Telefone VALUES (1151, '(81) 9 93091009'); -- Beatriz Nunes da Costa
 INSERT INTO Telefone VALUES (1152, '(81) 9 94101110'); -- Thiago Martins Bezerra
 
--- 5. Colaboradores:
+-- 5. Colaboradores das duas unidades:
 
 -- Smart fit:
 INSERT INTO Colaborador VALUES (1113, 'Professor(a)', 3100.00, NULL, 10, TO_DATE('2004-07-22','YYYY-MM-DD')); -- Anysabele
@@ -146,12 +142,6 @@ INSERT INTO Colaborador VALUES (1149, 'Personal', 3900.00, 1148, 20, TO_DATE('20
 INSERT INTO Colaborador VALUES (1150, 'Recepcionista', 2000.00, 1148, 20, TO_DATE('1999-07-21', 'YYYY-MM-DD')); 
 INSERT INTO Colaborador VALUES (1151, 'Zelador', 1700.00, 1148, 20 , TO_DATE('2004-02-16', 'YYYY-MM-DD')); 
 INSERT INTO Colaborador VALUES (1152, 'Estagiário', 500.00, 1148, 20, TO_DATE('1995-11-04','YYYY-MM-DD')); 
-
-
-
-
-
-
 
 
 
@@ -202,7 +192,7 @@ INSERT INTO Aluno VALUES (1146);
 INSERT INTO Aluno VALUES (1147);
 
 
--- 7. Contato de Emergência:
+-- 7. Contato de Emergência de cada aluno cadastrado:
 INSERT INTO Contatos_Emergencia_Alunos VALUES (1114, 'Cesar Ismael da Silva', TO_DATE('1970-04-12','YYYY-MM-DD'), 'Pai');
 INSERT INTO Contatos_Emergencia_Alunos VALUES (1116, 'Carlos Resende Toscano', TO_DATE('1970-04-12','YYYY-MM-DD'), 'Pai');
 INSERT INTO Contatos_Emergencia_Alunos VALUES (1120, 'Ana Fernandes da Silva', TO_DATE('1978-09-03','YYYY-MM-DD'), 'Mãe');
@@ -234,20 +224,20 @@ INSERT INTO Contatos_Emergencia_Alunos VALUES (1145, 'Marcos Rocha dos Santos', 
 INSERT INTO Contatos_Emergencia_Alunos VALUES (1146, 'Silvia Pereira Cavalcante', TO_DATE('1981-12-18','YYYY-MM-DD'), 'Mãe');
 INSERT INTO Contatos_Emergencia_Alunos VALUES (1147, 'Fernando Alves Rodrigues', TO_DATE('1967-06-02','YYYY-MM-DD'), 'Pai');
 
--- 8. Plano:
--- 8.1 (Smartfit)
+-- 8. Tipos de Planos que cada Unidade possui:
+-- 8.1 Smartfit:
 INSERT INTO Plano VALUES (5555, 'Plano Semestral', 649.00 , '6 meses'); 
 INSERT INTO Plano VALUES (5556, 'Plano Anual', 1200.00, '1 ano');     
 INSERT INTO Plano VALUES (5557, 'Plano Trimestral', 350.00, '3 meses');
 INSERT INTO Plano VALUES (5558, 'Plano Mensal', 150.00, '30 dias');
 
--- 8.2 Selfit
+-- 8.2 Selfit:
 INSERT INTO Plano VALUES (5559, 'Plano Semestral', 749.00 , '6 meses'); 
 INSERT INTO Plano VALUES (5560, 'Plano Anual', 1400.00, '1 ano');     
 INSERT INTO Plano VALUES (5561, 'Plano Trimestral', 450.00, '3 meses');
 INSERT INTO Plano VALUES (5562, 'Plano Mensal', 350.00, '30 dias');
 
--- 9. Oferece:
+-- 9. O que cada unidade pode oferecer uma vez que vc fez um plano:
 
 -- 9.1 Smartfit
 INSERT INTO Oferece VALUES (10, 5555, 'musculação, dança e lutas');
@@ -263,7 +253,7 @@ INSERT INTO Oferece VALUES (20, 5562, 'musculação e lutas');
 
 
 
--- 10. Matriculas(Plano_Aluno_Unidade):
+-- 10. Matriculas referentes ao Alunos cadastrados (Plano_Aluno_Unidade):
 INSERT INTO Matricula VALUES (6000, 1114, 10, 5555, 'ativo', TO_DATE('2026-06-02', 'YYYY-MM-DD'));
 INSERT INTO Matricula VALUES (6001, 1116, 10, 5556, 'ativo', TO_DATE('2024-05-04', 'YYYY-MM-DD'));
 INSERT INTO Matricula VALUES (6002, 1120, 10, 5557, 'ativo', TO_DATE('2024-04-06', 'YYYY-MM-DD'));
@@ -299,7 +289,7 @@ INSERT INTO Matricula VALUES (6029, 1147, 20, 5562, 'ativo', TO_DATE('2026-03-05
 
 
 
--- 11. Frequenta 
+-- 11. Mapeamento de frequencia de cada aluno para uma Unidade:
 
 INSERT INTO Frequenta (data_acesso, id_aluno, id_unidade)
 SELECT data_inicio, id_aluno, id_unidade
@@ -308,9 +298,9 @@ FROM Matricula;
 
 
 
--- 12.: MBM
+-- 12.: MBM(Movimentações Bancárias Mensais):
 
--- remuneração
+-- 12.1 remuneração
 INSERT INTO MBM VALUES (9000, TO_DATE('2026-01-02','YYYY-MM-DD'), 3100.00, 'pago'); 
 INSERT INTO MBM VALUES (9001, TO_DATE('2026-01-03','YYYY-MM-DD'), 4100.00, 'pago'); 
 INSERT INTO MBM VALUES (9002, TO_DATE('2026-01-14','YYYY-MM-DD'), 2200.00, 'pago'); 
@@ -322,7 +312,7 @@ INSERT INTO MBM VALUES (9007, TO_DATE('2026-02-19','YYYY-MM-DD'), 2000.00, 'pago
 INSERT INTO MBM VALUES (9008, TO_DATE('2026-02-20','YYYY-MM-DD'), 1700.00, 'pago'); 
 INSERT INTO MBM VALUES (9009, TO_DATE('2026-02-28','YYYY-MM-DD'), 500.00, 'pago');
 
--- mensalidades
+-- 12.2 mensalidades
 INSERT INTO MBM VALUES (9010, TO_DATE('2026-03-01','YYYY-MM-DD'), 649.00, 'pago');
 INSERT INTO MBM VALUES (9011, TO_DATE('2026-03-02','YYYY-MM-DD'), 1200.00, 'pago');
 INSERT INTO MBM VALUES (9012, TO_DATE('2026-03-03','YYYY-MM-DD'), 350.00, 'pago');
@@ -345,7 +335,7 @@ INSERT INTO MBM VALUES (9028, TO_DATE('2026-03-19','YYYY-MM-DD'), 450.00, 'pago'
 INSERT INTO MBM VALUES (9029, TO_DATE('2026-03-20','YYYY-MM-DD'), 350.00, 'pago');
 
 
--- Mensalidade:
+-- Mensalidade paga por cada Aluno :
 INSERT INTO Mensalidade VALUES (9010, 6000, 1114, 10);
 INSERT INTO Mensalidade VALUES (9011, 6001, 1116, 10);
 INSERT INTO Mensalidade VALUES (9012, 6002, 1120, 10);
@@ -367,7 +357,7 @@ INSERT INTO Mensalidade VALUES (9027, 6017, 1135, 20);
 INSERT INTO Mensalidade VALUES (9028, 6018, 1136, 20);
 INSERT INTO Mensalidade VALUES (9029, 6019, 1137, 20);
 
--- Remuneração:
+-- Remuneração dos colaboradores da academia :
 INSERT INTO Remuneração VALUES (9000, 1113); -- Anysabele
 INSERT INTO Remuneração VALUES (9001, 1119); -- Jairo
 INSERT INTO Remuneração VALUES (9002, 1117); -- Julio
@@ -380,8 +370,7 @@ INSERT INTO Remuneração VALUES (9007, 1150); -- Recepcionista
 INSERT INTO Remuneração VALUES (9008, 1151); -- Zelador
 INSERT INTO Remuneração VALUES (9009, 1152); -- Estagiário
 
--- 12. Avaliações:
-
+-- 12. Avaliações realizadas por cada aluno cadastrado:
 
 INSERT INTO Avaliação_Aluno VALUES (1000, 1114, 1113, 'Hipertrofia', TO_DATE('01-01-2026','DD-MM-YYYY'));
 INSERT INTO Avaliação_Aluno VALUES (1001, 1116, 1113, 'Emagrecimento', TO_DATE('02-01-2026','DD-MM-YYYY'));
@@ -416,7 +405,8 @@ INSERT INTO Avaliação_Aluno VALUES (1028, 1146, 1148, 'Hipertrofia leve', TO_D
 INSERT INTO Avaliação_Aluno VALUES (1029, 1147, 1148, 'Força e resistência', TO_DATE('15-02-2026','DD-MM-YYYY'));
 
 
--- Treinos:
+-- Treinos passados para cada aluno:
+
 INSERT INTO Treino VALUES (2000, 'Treino A: Peito e tríceps', 1000, 1114, 1113);
 INSERT INTO Treino VALUES (2001, 'Treino B: Costas e bíceps', 1001, 1116, 1113);
 INSERT INTO Treino VALUES (2002, 'Treino C: Pernas completas', 1002, 1120, 1113);
