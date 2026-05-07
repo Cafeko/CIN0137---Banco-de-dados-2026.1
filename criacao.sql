@@ -13,8 +13,8 @@ Vinicius guedes de macedo          - Vgm
 
 -- DROP TABLE:
 DROP TABLE Treino CASCADE CONSTRAINTS;
-DROP TABLE Avaliacao_Aluno CASCADE CONSTRAINTS;
-DROP TABLE Remuneracao CASCADE CONSTRAINTS;
+DROP TABLE Avaliação_Aluno CASCADE CONSTRAINTS;
+DROP TABLE Remuneração CASCADE CONSTRAINTS;
 DROP TABLE Mensalidade CASCADE CONSTRAINTS;
 DROP TABLE MBM CASCADE CONSTRAINTS;
 DROP TABLE Matricula CASCADE CONSTRAINTS;
@@ -30,26 +30,26 @@ DROP TABLE Colaborador CASCADE CONSTRAINTS;
 DROP TABLE Unidade CASCADE CONSTRAINTS;
 DROP TABLE Telefone CASCADE CONSTRAINTS;
 DROP TABLE Pessoa CASCADE CONSTRAINTS;
-DROP TABLE Enderecos CASCADE CONSTRAINTS;
+DROP TABLE Endereços CASCADE CONSTRAINTS;
 
 -- DROP SEQUENCES:
 DROP SEQUENCE Treino_id;
-DROP SEQUENCE Avaliacao_Aluno_id;
+DROP SEQUENCE Avaliação_Aluno_id;
 DROP SEQUENCE MBM_id;
 DROP SEQUENCE Matricula_id;
 DROP SEQUENCE Plano_id;
 DROP SEQUENCE Unidade_id;
 DROP SEQUENCE Pessoa_id;
 
--- Endereco
-CREATE TABLE Enderecos (
+-- Endereço
+CREATE TABLE Endereços (
     cep VARCHAR2(9),
-    pais VARCHAR2(50),
+    país VARCHAR2(50),
     estado VARCHAR2(50),
     cidade VARCHAR2(50),
     bairro VARCHAR2(50),
     rua VARCHAR2(80),
-    CONSTRAINT Enderecos_pkey PRIMARY KEY (cep)
+    CONSTRAINT Endereços_pkey PRIMARY KEY (cep)
 );
 
 -- Pessoa
@@ -57,12 +57,12 @@ CREATE TABLE Pessoa (
     id integer,
     nome VARCHAR2(50),
     data_nasc DATE,
-    cpf VARCHAR2(14), -- Aumentado para suportar mascara 000.000.000-00
+    cpf VARCHAR2(14), -- Aumentado para suportar máscara 000.000.000-00
     cep VARCHAR2(9),
     numero VARCHAR2(5),
     complemento VARCHAR2(50),
     CONSTRAINT Pessoa_pkey PRIMARY KEY (id),
-    CONSTRAINT Pessoa_fkey FOREIGN KEY (cep) REFERENCES Enderecos (cep)
+    CONSTRAINT Pessoa_fkey FOREIGN KEY (cep) REFERENCES Endereços (cep)
 );
 
 CREATE SEQUENCE Pessoa_id INCREMENT BY 1 START WITH 1000;
@@ -71,8 +71,8 @@ CREATE SEQUENCE Pessoa_id INCREMENT BY 1 START WITH 1000;
 CREATE TABLE Telefone (
     id_pessoa integer,
     telefone VARCHAR2(20), -- Aumentado para suportar máscara (81) 9 ...
-    CONSTRAINT Telefone_pk PRIMARY KEY (id_pessoa, telefone),
-    CONSTRAINT Telefone_fkey FOREIGN KEY (id_pessoa) REFERENCES Pessoa (id)
+    CONSTRAINT Telefone_pkeys PRIMARY KEY (id_pessoa, telefone),
+    CONSTRAINT TELEFONE_fkey FOREIGN KEY (id_pessoa) REFERENCES Pessoa (id)
 );
 
 -- Unidade
@@ -82,7 +82,7 @@ CREATE TABLE Unidade (
     cep VARCHAR2(9),
     numero VARCHAR2(5),
     CONSTRAINT Unidade_pkey PRIMARY KEY (id_unidade),
-    CONSTRAINT Unidade_fkey FOREIGN KEY (cep) REFERENCES Enderecos (cep)
+    CONSTRAINT Unidade_fkey FOREIGN KEY (cep) REFERENCES Endereços (cep)
 );
 
 CREATE SEQUENCE Unidade_id INCREMENT BY 1 START WITH 1000;
@@ -94,7 +94,7 @@ CREATE TABLE Colaborador (
     salario DECIMAL(10,2),
     id_supervisor integer,
     unidade_alocado integer,
-    data_alocacao DATE,
+    data_alocação DATE,
     CONSTRAINT Colaborador_pkey PRIMARY KEY (id_pessoa),
     CONSTRAINT Colaborador_fkey1 FOREIGN KEY (id_pessoa) REFERENCES Pessoa (id),
     CONSTRAINT Colaborador_fkey2 FOREIGN KEY (id_supervisor) REFERENCES Colaborador (id_pessoa),
@@ -118,8 +118,8 @@ CREATE TABLE Professor (
 -- Aluno
 CREATE TABLE Aluno (
     id_pessoa integer,
-    CONSTRAINT Aluno_pkey PRIMARY KEY (id_pessoa),
-    CONSTRAINT Aluno_fkey FOREIGN KEY (id_pessoa) REFERENCES Pessoa (id)
+    CONSTRAINT Alumo_pkey PRIMARY KEY (id_pessoa),
+    CONSTRAINT Alumo_fkey FOREIGN KEY (id_pessoa) REFERENCES Pessoa (id)
 );
 
 -- Contatos de Emergencia Alunos
@@ -137,7 +137,7 @@ CREATE TABLE Frequenta (
     data_acesso DATE,
     id_aluno integer,
     id_unidade integer,
-    CONSTRAINT Frequenta_pk PRIMARY KEY (data_acesso, id_aluno, id_unidade),
+    CONSTRAINT Frequenta_pkeys PRIMARY KEY (data_acesso, id_aluno, id_unidade),
     CONSTRAINT Frequenta_fkey1 FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa),
     CONSTRAINT Frequenta_fkey2 FOREIGN KEY (id_unidade) REFERENCES Unidade (id_unidade)
 );
@@ -146,7 +146,7 @@ CREATE TABLE Frequenta (
 CREATE TABLE Atende (
     id_aluno integer,
     id_funcionario integer,
-    CONSTRAINT Atende_pk PRIMARY KEY (id_aluno, id_funcionario),
+    CONSTRAINT Atende_pkeys PRIMARY KEY (id_aluno, id_funcionario),
     CONSTRAINT Atende_fkey1 FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa),
     CONSTRAINT Atende_fkey2 FOREIGN KEY (id_funcionario) REFERENCES Funcionario (id_colaborador)
 );
@@ -155,8 +155,8 @@ CREATE TABLE Atende (
 CREATE TABLE Plano (
     id_plano integer,
     nome VARCHAR2(50),
-    valor NUMBER(10,2),
-    duracao VARCHAR2(20), -- Aumentado para suportar '6 meses', '1 ano'
+    valor DECIMAL(10,2),
+    duração VARCHAR2(20), -- Aumentado para suportar '6 meses', '1 ano'
     CONSTRAINT Plano_pkey PRIMARY KEY (id_plano)
 );
 
@@ -167,7 +167,7 @@ CREATE TABLE Oferece (
     id_unidade integer,
     id_plano integer,
     beneficios VARCHAR2(50),
-    CONSTRAINT Oferece_pk PRIMARY KEY (id_unidade, id_plano),
+    CONSTRAINT Oferece_pkeys PRIMARY KEY (id_unidade, id_plano),
     CONSTRAINT Oferece_fkey1 FOREIGN KEY (id_unidade) REFERENCES Unidade (id_unidade),
     CONSTRAINT Oferece_fkey2 FOREIGN KEY (id_plano) REFERENCES Plano (id_plano)
 );
@@ -181,7 +181,7 @@ CREATE TABLE Matricula (
     status_matricula VARCHAR2(10),
     data_inicio DATE,
     CHECK (status_matricula IN ('ativo', 'inativo')),
-    CONSTRAINT Matricula_pk PRIMARY KEY (id_matricula, id_aluno, id_unidade),
+    CONSTRAINT Matricula_pkeys PRIMARY KEY (id_matricula, id_aluno, id_unidade),
     CONSTRAINT Matricula_fkey1 FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa),
     CONSTRAINT Matricula_fkey2 FOREIGN KEY (id_unidade) REFERENCES Unidade (id_unidade),
     CONSTRAINT Matricula_fkey3 FOREIGN KEY (id_plano) REFERENCES Plano (id_plano)
@@ -213,13 +213,13 @@ CREATE TABLE Mensalidade (
         REFERENCES Matricula (id_matricula, id_aluno, id_unidade)
 );
 
--- Remuneracao
-CREATE TABLE Remuneracao (
+-- Remuneração
+CREATE TABLE Remuneração (
     id integer,
     colaborador_recebe integer,
-    CONSTRAINT Remuneracao_pkey PRIMARY KEY (id),
-    CONSTRAINT Remuneracao_fkey1 FOREIGN KEY (id) REFERENCES MBM (id_pagamento),
-    CONSTRAINT Remuneracao_fkey2 FOREIGN KEY (colaborador_recebe) REFERENCES Colaborador (id_pessoa)
+    CONSTRAINT Remuneração_pkey PRIMARY KEY (id),
+    CONSTRAINT Remuneração_fkey1 FOREIGN KEY (id) REFERENCES MBM (id_pagamento),
+    CONSTRAINT Remuneração_fkey2 FOREIGN KEY (colaborador_recebe) REFERENCES Colaborador (id_pessoa)
 );
 
 -- Avaliação de Aluno
@@ -228,29 +228,24 @@ CREATE TABLE Avaliação_Aluno (
     id_aluno integer,
     id_professor integer,
     objetivo VARCHAR2(200),
-    data_avaliacao DATE,
-    CONSTRAINT Avaliacao_Aluno_pk PRIMARY KEY (id_avaliacao, id_aluno, id_professor),
-    CONSTRAINT Avaliacao_Aluno_fkey1 FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa),
-    CONSTRAINT Avaliacao_Aluno_fkey2 FOREIGN KEY (id_professor) REFERENCES Professor (id_colaborador)
+    data_avaliação DATE,
+    CONSTRAINT Avaliação_Aluno_pkeys PRIMARY KEY (id_avaliação, id_aluno, id_professor),
+    CONSTRAINT Avaliação_Aluno_fkey1 FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa),
+    CONSTRAINT Avaliação_Aluno_fkey2 FOREIGN KEY (id_professor) REFERENCES Professor (id_colaborador)
 );
 
-CREATE SEQUENCE Avaliacao_Aluno_id INCREMENT BY 1 START WITH 1000;
+CREATE SEQUENCE Avaliação_Aluno_id INCREMENT BY 1 START WITH 1000;
 
 -- Treino
 CREATE TABLE Treino (
     id_treino integer,
-    descricao VARCHAR2(200),
-    id_avaliacao_aluno integer,
+    descrição VARCHAR2(200),
+    id_avaliação_aluno integer,
     id_aluno integer,
     id_professor integer,
     CONSTRAINT Treino_pkey PRIMARY KEY (id_treino),
-    CONSTRAINT Treino_fkey FOREIGN KEY (id_avaliacao_aluno, id_aluno, id_professor)
-        REFERENCES Avaliacao_Aluno (id_avaliacao, id_aluno, id_professor)
+    CONSTRAINT Treino_fkey FOREIGN KEY (id_avaliação_aluno, id_aluno, id_professor)
+        REFERENCES Avaliação_Aluno (id_avaliação, id_aluno, id_professor)
 );
 
 CREATE SEQUENCE Treino_id INCREMENT BY 1 START WITH 1000;
-
--- Constraints adicionais de integridade
-ALTER TABLE Pessoa ADD CONSTRAINT Pessoa_cpf_unq UNIQUE (cpf);
-ALTER TABLE Pessoa MODIFY cpf NOT NULL;
-ALTER TABLE Pessoa MODIFY nome NOT NULL;
