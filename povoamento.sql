@@ -1,4 +1,3 @@
-
 -- Equipe 2 --
 /* Dyego Ferreira da Silva            - dfs10
 Caio Ferreira Gomes da Silva       - cfgs
