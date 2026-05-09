@@ -44,9 +44,11 @@ CREATE INDEX index_matriculas_aluno ON Matricula (id_aluno);
 CREATE INDEX index_avaliação_aluno_alunoprofessor ON Avaliação_Aluno (id_aluno, id_professor);
 
 
---  --
-
-
+-- Quantidade de alunos com matricula ativa por unidade --
+SELECT U.nome_unidade, COUNT(DISTINCT M.id_aluno) as alunos_ativos 
+FROM Unidade U, Matricula M
+WHERE M.status_matricula = 'ativo' AND U.id_unidade = M.id_unidade
+GROUP BY U.nome_unidade;
 
 --  --
 
