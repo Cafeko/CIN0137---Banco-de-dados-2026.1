@@ -181,7 +181,7 @@ CREATE TABLE Matricula (
     status_matricula VARCHAR2(10),
     data_inicio DATE,
     CHECK (status_matricula IN ('ativo', 'inativo')),
-    CONSTRAINT Matricula_pkeys PRIMARY KEY (id_matricula, id_aluno, id_unidade),
+    CONSTRAINT Matricula_pkeys PRIMARY KEY (id_matricula),
     CONSTRAINT Matricula_fkey1 FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa),
     CONSTRAINT Matricula_fkey2 FOREIGN KEY (id_unidade) REFERENCES Unidade (id_unidade),
     CONSTRAINT Matricula_fkey3 FOREIGN KEY (id_plano) REFERENCES Plano (id_plano)
@@ -205,12 +205,10 @@ CREATE SEQUENCE MBM_id INCREMENT BY 1 START WITH 1000;
 CREATE TABLE Mensalidade (
     id integer,
     id_matricula integer,
-    id_aluno integer,
-    id_unidade integer,
     CONSTRAINT Mensalidade_pkey PRIMARY KEY (id),
     CONSTRAINT Mensalidade_fkey1 FOREIGN KEY (id) REFERENCES MBM (id_pagamento),
-    CONSTRAINT Mensalidade_fkey2 FOREIGN KEY (id_matricula, id_aluno, id_unidade) 
-        REFERENCES Matricula (id_matricula, id_aluno, id_unidade)
+    CONSTRAINT Mensalidade_fkey2 FOREIGN KEY (id_matricula) 
+        REFERENCES Matricula (id_matricula)
 );
 
 -- Remuneração
@@ -229,7 +227,7 @@ CREATE TABLE Avaliação_Aluno (
     id_professor integer,
     objetivo VARCHAR2(200),
     data_avaliação DATE,
-    CONSTRAINT Avaliação_Aluno_pkeys PRIMARY KEY (id_avaliação, id_aluno, id_professor),
+    CONSTRAINT Avaliação_Aluno_pkeys PRIMARY KEY (id_avaliação),
     CONSTRAINT Avaliação_Aluno_fkey1 FOREIGN KEY (id_aluno) REFERENCES Aluno (id_pessoa),
     CONSTRAINT Avaliação_Aluno_fkey2 FOREIGN KEY (id_professor) REFERENCES Professor (id_colaborador)
 );
@@ -241,11 +239,9 @@ CREATE TABLE Treino (
     id_treino integer,
     descrição VARCHAR2(200),
     id_avaliação_aluno integer,
-    id_aluno integer,
-    id_professor integer,
     CONSTRAINT Treino_pkey PRIMARY KEY (id_treino),
-    CONSTRAINT Treino_fkey FOREIGN KEY (id_avaliação_aluno, id_aluno, id_professor)
-        REFERENCES Avaliação_Aluno (id_avaliação, id_aluno, id_professor)
+    CONSTRAINT Treino_fkey FOREIGN KEY (id_avaliação_aluno)
+        REFERENCES Avaliação_Aluno (id_avaliação)
 );
 
 CREATE SEQUENCE Treino_id INCREMENT BY 1 START WITH 1000;

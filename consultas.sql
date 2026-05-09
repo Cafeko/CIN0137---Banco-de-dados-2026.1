@@ -9,7 +9,7 @@ Vinicius guedes de macedo          - Vgm
 
 -- script de consultas --
 
--- Adicionar email de alunos para receberem notificações da academia.
+-- Adicionar email de alunos para receberem notificações da academia. --
 ALTER TABLE Aluno ADD email VARCHAR2(60);
 UPDATE Aluno SET email = 'MarianaAlves123@gmail.com' WHERE id_pessoa = 1121;
 UPDATE Aluno SET email = 'CarlosEPL@gmail.com' WHERE id_pessoa = 1122;
@@ -29,4 +29,33 @@ UPDATE Aluno SET email = 'PriscilaAlves@gmail.com' WHERE id_pessoa = 1147;
 COMMIT;
 
 
--- 
+-- Cria indices para buscas mais rapidas. --
+/*
+    Indice enumera um atributo e ajuda consultas sobre aquele atributo a serem mais rapidas.
+    Melhor para atributos que não tem valores que se repetem muito.
+*/ 
+-- Ajuda em consulstas de pessoas por cpf:
+CREATE INDEX index_pessoa ON Pessoa (cpf);
+
+-- Ajuda em consulstas de matriculas por aluno:
+CREATE INDEX index_matriculas_aluno ON Matricula (id_aluno);
+
+-- Ajuda em consulstas de avaliação por aluno e/ou professor:
+CREATE INDEX index_avaliação_aluno_alunoprofessor ON Avaliação_Aluno (id_aluno, id_professor);
+
+
+--  --
+
+
+
+--  --
+
+
+
+--  --
+
+
+
+--  --
+
+

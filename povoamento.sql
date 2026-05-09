@@ -335,26 +335,26 @@ INSERT INTO MBM VALUES (9029, TO_DATE('2026-03-20','YYYY-MM-DD'), 350.00, 'pago'
 
 
 -- Mensalidade paga por cada Aluno :
-INSERT INTO Mensalidade VALUES (9010, 6000, 1114, 10);
-INSERT INTO Mensalidade VALUES (9011, 6001, 1116, 10);
-INSERT INTO Mensalidade VALUES (9012, 6002, 1120, 10);
-INSERT INTO Mensalidade VALUES (9013, 6003, 1121, 10);
-INSERT INTO Mensalidade VALUES (9014, 6004, 1122, 10);
-INSERT INTO Mensalidade VALUES (9015, 6005, 1123, 10);
-INSERT INTO Mensalidade VALUES (9016, 6006, 1124, 10);
-INSERT INTO Mensalidade VALUES (9017, 6007, 1125, 10);
-INSERT INTO Mensalidade VALUES (9018, 6008, 1126, 10);
-INSERT INTO Mensalidade VALUES (9019, 6009, 1127, 10);
-INSERT INTO Mensalidade VALUES (9020, 6010, 1128, 10);
-INSERT INTO Mensalidade VALUES (9021, 6011, 1129, 10);
-INSERT INTO Mensalidade VALUES (9022, 6012, 1130, 10);
-INSERT INTO Mensalidade VALUES (9023, 6013, 1131, 10);
-INSERT INTO Mensalidade VALUES (9024, 6014, 1132, 10);
-INSERT INTO Mensalidade VALUES (9025, 6015, 1133, 20);
-INSERT INTO Mensalidade VALUES (9026, 6016, 1134, 20);
-INSERT INTO Mensalidade VALUES (9027, 6017, 1135, 20);
-INSERT INTO Mensalidade VALUES (9028, 6018, 1136, 20);
-INSERT INTO Mensalidade VALUES (9029, 6019, 1137, 20);
+INSERT INTO Mensalidade VALUES (9010, 6000);
+INSERT INTO Mensalidade VALUES (9011, 6001);
+INSERT INTO Mensalidade VALUES (9012, 6002);
+INSERT INTO Mensalidade VALUES (9013, 6003);
+INSERT INTO Mensalidade VALUES (9014, 6004);
+INSERT INTO Mensalidade VALUES (9015, 6005);
+INSERT INTO Mensalidade VALUES (9016, 6006);
+INSERT INTO Mensalidade VALUES (9017, 6007);
+INSERT INTO Mensalidade VALUES (9018, 6008);
+INSERT INTO Mensalidade VALUES (9019, 6009);
+INSERT INTO Mensalidade VALUES (9020, 6010);
+INSERT INTO Mensalidade VALUES (9021, 6011);
+INSERT INTO Mensalidade VALUES (9022, 6012);
+INSERT INTO Mensalidade VALUES (9023, 6013);
+INSERT INTO Mensalidade VALUES (9024, 6014);
+INSERT INTO Mensalidade VALUES (9025, 6015);
+INSERT INTO Mensalidade VALUES (9026, 6016);
+INSERT INTO Mensalidade VALUES (9027, 6017);
+INSERT INTO Mensalidade VALUES (9028, 6018);
+INSERT INTO Mensalidade VALUES (9029, 6019);
 
 -- Remuneração dos colaboradores da academia :
 INSERT INTO Remuneração VALUES (9000, 1113); -- Anysabele
@@ -406,35 +406,35 @@ INSERT INTO Avaliação_Aluno VALUES (1029, 1147, 1148, 'Força e resistência',
 
 -- Treinos passados para cada aluno:
 
-INSERT INTO Treino VALUES (2000, 'Treino A: Peito e tríceps', 1000, 1114, 1113);
-INSERT INTO Treino VALUES (2001, 'Treino B: Costas e bíceps', 1001, 1116, 1113);
-INSERT INTO Treino VALUES (2002, 'Treino C: Pernas completas', 1002, 1120, 1113);
-INSERT INTO Treino VALUES (2003, 'Treino D: Ombros e abdômen', 1003, 1121, 1113);
-INSERT INTO Treino VALUES (2004, 'Treino E: Full body', 1004, 1122, 1113);
-INSERT INTO Treino VALUES (2005, 'Treino força básica', 1005, 1123, 1113);
-INSERT INTO Treino VALUES (2006, 'Treino hipertrofia leve', 1006, 1124, 1113);
-INSERT INTO Treino VALUES (2007, 'Treino queima de gordura', 1007, 1125, 1113);
-INSERT INTO Treino VALUES (2008, 'Treino funcional geral', 1008, 1126, 1113);
-INSERT INTO Treino VALUES (2009, 'Treino cardio avançado', 1009, 1127, 1113);
-INSERT INTO Treino VALUES (2010, 'Treino força máxima', 1010, 1128, 1113);
-INSERT INTO Treino VALUES (2011, 'Treino hipertrofia avançada', 1011, 1129, 1113);
-INSERT INTO Treino VALUES (2012, 'Treino definição', 1012, 1130, 1113);
-INSERT INTO Treino VALUES (2013, 'Treino resistência', 1013, 1131, 1113);
-INSERT INTO Treino VALUES (2014, 'Treino massa muscular', 1014, 1132, 1113);
-INSERT INTO Treino VALUES (2015, 'Treino hipertrofia', 1015, 1133, 1148);
-INSERT INTO Treino VALUES (2016, 'Treino emagrecimento', 1016, 1134, 1148);
-INSERT INTO Treino VALUES (2017, 'Treino resistência', 1017, 1135, 1148);
-INSERT INTO Treino VALUES (2018, 'Treino reabilitação', 1018, 1136, 1148);
-INSERT INTO Treino VALUES (2019, 'Treino condicionamento', 1019, 1137, 1148);
-INSERT INTO Treino VALUES (2020, 'Treino explosão muscular', 1020, 1138, 1148);
-INSERT INTO Treino VALUES (2021, 'Treino hipertrofia avançada', 1021, 1139, 1148);
-INSERT INTO Treino VALUES (2022, 'Treino emagrecimento intenso', 1022, 1140, 1148);
-INSERT INTO Treino VALUES (2023, 'Treino funcional', 1023, 1141, 1148);
-INSERT INTO Treino VALUES (2024, 'Treino resistência muscular', 1024, 1142, 1148);
-INSERT INTO Treino VALUES (2025, 'Treino massa', 1025, 1143, 1148);
-INSERT INTO Treino VALUES (2026, 'Treino definição corporal', 1026, 1144, 1148);
-INSERT INTO Treino VALUES (2027, 'Treino geral fitness', 1027, 1145, 1148);
-INSERT INTO Treino VALUES (2028, 'Treino hipertrofia leve', 1028, 1146, 1148);
-INSERT INTO Treino VALUES (2029, 'Treino força e resistência', 1029, 1147, 1148);
+INSERT INTO Treino VALUES (2000, 'Treino A: Peito e tríceps', 1000);
+INSERT INTO Treino VALUES (2001, 'Treino B: Costas e bíceps', 1001);
+INSERT INTO Treino VALUES (2002, 'Treino C: Pernas completas', 1002);
+INSERT INTO Treino VALUES (2003, 'Treino D: Ombros e abdômen', 1003);
+INSERT INTO Treino VALUES (2004, 'Treino E: Full body', 1004);
+INSERT INTO Treino VALUES (2005, 'Treino força básica', 1005);
+INSERT INTO Treino VALUES (2006, 'Treino hipertrofia leve', 1006);
+INSERT INTO Treino VALUES (2007, 'Treino queima de gordura', 1007);
+INSERT INTO Treino VALUES (2008, 'Treino funcional geral', 1008);
+INSERT INTO Treino VALUES (2009, 'Treino cardio avançado', 1009);
+INSERT INTO Treino VALUES (2010, 'Treino força máxima', 1010);
+INSERT INTO Treino VALUES (2011, 'Treino hipertrofia avançada', 1011);
+INSERT INTO Treino VALUES (2012, 'Treino definição', 1012);
+INSERT INTO Treino VALUES (2013, 'Treino resistência', 1013);
+INSERT INTO Treino VALUES (2014, 'Treino massa muscular', 1014);
+INSERT INTO Treino VALUES (2015, 'Treino hipertrofia', 1015);
+INSERT INTO Treino VALUES (2016, 'Treino emagrecimento', 1016);
+INSERT INTO Treino VALUES (2017, 'Treino resistência', 1017);
+INSERT INTO Treino VALUES (2018, 'Treino reabilitação', 1018);
+INSERT INTO Treino VALUES (2019, 'Treino condicionamento', 1019);
+INSERT INTO Treino VALUES (2020, 'Treino explosão muscular', 1020);
+INSERT INTO Treino VALUES (2021, 'Treino hipertrofia avançada', 1021);
+INSERT INTO Treino VALUES (2022, 'Treino emagrecimento intenso', 1022);
+INSERT INTO Treino VALUES (2023, 'Treino funcional', 1023);
+INSERT INTO Treino VALUES (2024, 'Treino resistência muscular', 1024);
+INSERT INTO Treino VALUES (2025, 'Treino massa', 1025);
+INSERT INTO Treino VALUES (2026, 'Treino definição corporal', 1026);
+INSERT INTO Treino VALUES (2027, 'Treino geral fitness', 1027);
+INSERT INTO Treino VALUES (2028, 'Treino hipertrofia leve', 1028);
+INSERT INTO Treino VALUES (2029, 'Treino força e resistência', 1029);
 
 COMMIT;
