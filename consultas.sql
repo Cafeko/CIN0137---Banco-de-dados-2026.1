@@ -50,8 +50,12 @@ FROM Unidade U, Matricula M
 WHERE M.status_matricula = 'ativo' AND U.id_unidade = M.id_unidade
 GROUP BY U.nome_unidade;
 
---  --
 
+-- Exibe alunos ordenados por idade, do mais velho ao mais novo --
+SELECT P.nome, P.data_nasc as data_nascimento, FLOOR(MONTHS_BETWEEN(SYSDATE, P.data_nasc)/12) as idade
+FROM Pessoa P, Aluno A
+WHERE P.id = A.id_pessoa
+ORDER BY idade DESC;
 
 
 --  --
