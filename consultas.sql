@@ -58,8 +58,10 @@ WHERE P.id = A.id_pessoa
 ORDER BY idade DESC;
 
 
---  --
-
+-- Alunos que não tem o email cadastrado --
+SELECT P.id, P.nome
+FROM Pessoa P INNER JOIN Aluno A ON P.id = A.id_pessoa
+WHERE A.email IS NULL;
 
 
 --  --
