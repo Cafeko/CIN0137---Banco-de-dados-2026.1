@@ -145,50 +145,50 @@ INSERT INTO Colaborador VALUES (1152, 'Estagiário', 500.00, 1148, 20, TO_DATE('
 
 
 -- 5.1 Professor:
-INSERT INTO Professor VALUES (1113);
-INSERT INTO Professor VALUES (1148);
+INSERT INTO Professor (id_colaborador) VALUES (1113);
+INSERT INTO Professor (id_colaborador) VALUES (1148);
 
 -- 5.2 Funcionário:
-INSERT INTO Funcionario VALUES(1119);
-INSERT INTO Funcionario VALUES(1117);
-INSERT INTO Funcionario VALUES(1111);
-INSERT INTO Funcionario VALUES(1115);
-INSERT INTO Funcionario VALUES(1149);
-INSERT INTO Funcionario VALUES(1150);
-INSERT INTO Funcionario VALUES(1151);
-INSERT INTO Funcionario VALUES(1152);
+INSERT INTO Funcionario (id_colaborador) VALUES(1119);
+INSERT INTO Funcionario (id_colaborador) VALUES(1117);
+INSERT INTO Funcionario (id_colaborador) VALUES(1111);
+INSERT INTO Funcionario (id_colaborador) VALUES(1115);
+INSERT INTO Funcionario (id_colaborador) VALUES(1149);
+INSERT INTO Funcionario (id_colaborador) VALUES(1150);
+INSERT INTO Funcionario (id_colaborador) VALUES(1151);
+INSERT INTO Funcionario (id_colaborador) VALUES(1152);
 
 -- 6. Alunos:
-INSERT INTO Aluno VALUES (1114);
-INSERT INTO Aluno VALUES (1116); 
-INSERT INTO Aluno VALUES (1120);
-INSERT INTO Aluno VALUES (1121);
-INSERT INTO Aluno VALUES (1122);
-INSERT INTO Aluno VALUES (1123); 
-INSERT INTO Aluno VALUES (1124);
-INSERT INTO Aluno VALUES (1125);
-INSERT INTO Aluno VALUES (1126);
-INSERT INTO Aluno VALUES (1127); 
-INSERT INTO Aluno VALUES (1128); 
-INSERT INTO Aluno VALUES (1129);
-INSERT INTO Aluno VALUES (1130);
-INSERT INTO Aluno VALUES (1131);
-INSERT INTO Aluno VALUES (1132); 
-INSERT INTO Aluno VALUES (1133);
-INSERT INTO Aluno VALUES (1134);
-INSERT INTO Aluno VALUES (1135);
-INSERT INTO Aluno VALUES (1136);
-INSERT INTO Aluno VALUES (1137); 
-INSERT INTO Aluno VALUES (1138);
-INSERT INTO Aluno VALUES (1139);
-INSERT INTO Aluno VALUES (1140);
-INSERT INTO Aluno VALUES (1141); 
-INSERT INTO Aluno VALUES (1142);
-INSERT INTO Aluno VALUES (1143);
-INSERT INTO Aluno VALUES (1144);
-INSERT INTO Aluno VALUES (1145);
-INSERT INTO Aluno VALUES (1146); 
-INSERT INTO Aluno VALUES (1147);
+INSERT INTO Aluno (id_pessoa) VALUES (1114);
+INSERT INTO Aluno (id_pessoa) VALUES (1116); 
+INSERT INTO Aluno (id_pessoa) VALUES (1120);
+INSERT INTO Aluno (id_pessoa) VALUES (1121);
+INSERT INTO Aluno (id_pessoa) VALUES (1122);
+INSERT INTO Aluno (id_pessoa) VALUES (1123); 
+INSERT INTO Aluno (id_pessoa) VALUES (1124);
+INSERT INTO Aluno (id_pessoa) VALUES (1125);
+INSERT INTO Aluno (id_pessoa) VALUES (1126);
+INSERT INTO Aluno (id_pessoa) VALUES (1127); 
+INSERT INTO Aluno (id_pessoa) VALUES (1128); 
+INSERT INTO Aluno (id_pessoa) VALUES (1129);
+INSERT INTO Aluno (id_pessoa) VALUES (1130);
+INSERT INTO Aluno (id_pessoa) VALUES (1131);
+INSERT INTO Aluno (id_pessoa) VALUES (1132); 
+INSERT INTO Aluno (id_pessoa) VALUES (1133);
+INSERT INTO Aluno (id_pessoa) VALUES (1134);
+INSERT INTO Aluno (id_pessoa) VALUES (1135);
+INSERT INTO Aluno (id_pessoa) VALUES (1136);
+INSERT INTO Aluno (id_pessoa) VALUES (1137); 
+INSERT INTO Aluno (id_pessoa) VALUES (1138);
+INSERT INTO Aluno (id_pessoa) VALUES (1139);
+INSERT INTO Aluno (id_pessoa) VALUES (1140);
+INSERT INTO Aluno (id_pessoa) VALUES (1141); 
+INSERT INTO Aluno (id_pessoa) VALUES (1142);
+INSERT INTO Aluno (id_pessoa) VALUES (1143);
+INSERT INTO Aluno (id_pessoa) VALUES (1144);
+INSERT INTO Aluno (id_pessoa) VALUES (1145);
+INSERT INTO Aluno (id_pessoa) VALUES (1146); 
+INSERT INTO Aluno (id_pessoa) VALUES (1147);
 
 
 -- 7. Contato de Emergência de cada aluno cadastrado:
